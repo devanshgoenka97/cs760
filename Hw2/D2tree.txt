@@ -1,0 +1,171 @@
+ ****************************** 
+
+Level  0 
+
+{'Headline': 'x1 >= 0.454801;  Gain = 0.10870229757359645',
+ 'Level': 0,
+ 'Predecessor': 1000,
+ 'Split': [554, 446]}
+
+ ****************************** 
+
+Level  1 
+
+{'Headline': 'x2 >= 0.224236;  Gain = 0.0875107332975339',
+ 'Level': 1,
+ 'Predecessor': 554,
+ 'Split': [425, 129]}
+{'Headline': 'x2 >= 0.691474;  Gain = 0.2732344702983795',
+ 'Level': 1,
+ 'Predecessor': 446,
+ 'Split': [130, 316]}
+
+ ****************************** 
+
+Level  2 
+
+{'Headline': 'x2 >= 0.506048;  Gain = 0.037745204614714756',
+ 'Level': 2,
+ 'Predecessor': 425,
+ 'Split': [268, 157]}
+{'Headline': 'x1 >= 0.850316;  Gain = 0.3457954684530756',
+ 'Level': 2,
+ 'Predecessor': 129,
+ 'Split': [40, 89]}
+{'Headline': 'x1 >= 0.104043;  Gain = 0.11205524520917615',
+ 'Level': 2,
+ 'Predecessor': 130,
+ 'Split': [97, 33]}
+{'Headline': 'x2 >= 0.574122;  Gain = 0.0444961485924624',
+ 'Level': 2,
+ 'Predecessor': 316,
+ 'Split': [44, 272]}
+
+ ****************************** 
+
+Level  3 
+
+{'Instances': 268, 'Label': 1, 'Level': 3}
+{'Headline': 'x1 >= 0.533076;  Gain = 0.1583224564708912',
+ 'Level': 3,
+ 'Predecessor': 157,
+ 'Split': [131, 26]}
+{'Headline': 'x2 >= 0.101635;  Gain = 0.15021149544404871',
+ 'Level': 3,
+ 'Predecessor': 40,
+ 'Split': [20, 20]}
+{'Instances': 89, 'Label': 0, 'Level': 3}
+{'Headline': 'x1 >= 0.254049;  Gain = 0.06929727769996619',
+ 'Level': 3,
+ 'Predecessor': 97,
+ 'Split': [50, 47]}
+{'Instances': 33, 'Label': 0, 'Level': 3}
+{'Headline': 'x1 >= 0.393227;  Gain = 0.2539116320253603',
+ 'Level': 3,
+ 'Predecessor': 44,
+ 'Split': [7, 37]}
+{'Instances': 272, 'Label': 0, 'Level': 3}
+
+ ****************************** 
+
+Level  4 
+
+{'Headline': 'x1 >= 0.708127;  Gain = 0.0840598718848928',
+ 'Level': 4,
+ 'Predecessor': 131,
+ 'Split': [80, 51]}
+{'Instances': 26, 'Label': 0, 'Level': 4}
+{'Instances': 20, 'Label': 1, 'Level': 4}
+{'Headline': 'x1 >= 0.941838;  Gain = 0.2724129999896828',
+ 'Level': 4,
+ 'Predecessor': 20,
+ 'Split': [10, 10]}
+{'Instances': 50, 'Label': 1, 'Level': 4}
+{'Headline': 'x2 >= 0.886587;  Gain = 0.18760579514258424',
+ 'Level': 4,
+ 'Predecessor': 47,
+ 'Split': [23, 24]}
+{'Headline': 'x1 >= 0.409972;  Gain = 0.3632474941632815',
+ 'Level': 4,
+ 'Predecessor': 7,
+ 'Split': [4, 3]}
+{'Instances': 37, 'Label': 0, 'Level': 4}
+
+ ****************************** 
+
+Level  5 
+
+{'Instances': 80, 'Label': 1, 'Level': 5}
+{'Headline': 'x2 >= 0.32625;  Gain = 0.23521545204051492',
+ 'Level': 5,
+ 'Predecessor': 51,
+ 'Split': [35, 16]}
+{'Instances': 10, 'Label': 1, 'Level': 5}
+{'Instances': 10, 'Label': 0, 'Level': 5}
+{'Instances': 23, 'Label': 1, 'Level': 5}
+{'Headline': 'x2 >= 0.792752;  Gain = 0.24451193345805167',
+ 'Level': 5,
+ 'Predecessor': 24,
+ 'Split': [12, 12]}
+{'Instances': 4, 'Label': 1, 'Level': 5}
+{'Instances': 3, 'Label': 0, 'Level': 5}
+
+ ****************************** 
+
+Level  6 
+
+{'Headline': 'x2 >= 0.4251;  Gain = 0.12108607825986156',
+ 'Level': 6,
+ 'Predecessor': 35,
+ 'Split': [17, 18]}
+{'Instances': 16, 'Label': 0, 'Level': 6}
+{'Headline': 'x1 >= 0.191915;  Gain = 0.35786692300593426',
+ 'Level': 6,
+ 'Predecessor': 12,
+ 'Split': [6, 6]}
+{'Instances': 12, 'Label': 0, 'Level': 6}
+
+ ****************************** 
+
+Level  7 
+
+{'Instances': 17, 'Label': 1, 'Level': 7}
+{'Headline': 'x1 >= 0.646007;  Gain = 0.22068886853450542',
+ 'Level': 7,
+ 'Predecessor': 18,
+ 'Split': [7, 11]}
+{'Instances': 6, 'Label': 1, 'Level': 7}
+{'Headline': 'x2 >= 0.864128;  Gain = 0.17994847393899066',
+ 'Level': 7,
+ 'Predecessor': 6,
+ 'Split': [2, 4]}
+
+ ****************************** 
+
+Level  8 
+
+{'Instances': 7, 'Label': 1, 'Level': 8}
+{'Headline': 'x2 >= 0.403494;  Gain = 0.22465014856779336',
+ 'Level': 8,
+ 'Predecessor': 11,
+ 'Split': [5, 6]}
+{'Instances': 2, 'Label': 1, 'Level': 8}
+{'Instances': 4, 'Label': 0, 'Level': 8}
+
+ ****************************** 
+
+Level  9 
+
+{'Headline': 'x1 >= 0.595471;  Gain = 0.7333421436179776',
+ 'Level': 9,
+ 'Predecessor': 5,
+ 'Split': [3, 2]}
+{'Instances': 6, 'Label': 0, 'Level': 9}
+
+ ****************************** 
+
+Level  10 
+
+{'Instances': 3, 'Label': 1, 'Level': 10}
+{'Instances': 2, 'Label': 0, 'Level': 10}
+Total Nodes:  23

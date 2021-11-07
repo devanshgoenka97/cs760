@@ -1,0 +1,5 @@
+**/data/*
+**/datasets/*
+**/*.tgz
+**/.ipynb_checkpoints
+**/__pycache__/
