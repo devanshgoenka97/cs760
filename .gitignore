@@ -1,5 +1,7 @@
+**/.DS_Store
 **/data/*
 **/datasets/*
+**/dataset/*
 **/*.tgz
 **/.ipynb_checkpoints
 **/__pycache__/
