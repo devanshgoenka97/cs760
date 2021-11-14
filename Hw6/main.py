@@ -9,7 +9,6 @@ from svm import SVM
 import matplotlib.pyplot as pl
 import numpy as np
 
-
 COLORS = ['red', 'blue']
 
 def plot_separator(ax, w, b):
@@ -175,6 +174,96 @@ def test_linear():
     pl.figure(figsize=(8, 6))
     fig.show()
     input("Close the figure and press a key to continue")
+
+    # Creating varying gaussians
+    means = np.linspace(1., 2.4, num=8)
+    accuracies = {'Linear SVM': [], 'Logistic Regression': [], 'K Nearest Neighbors': [], 'Gaussian Naive Bayes': []}
+    for mean in means:
+        print(f"For Gaussian with mean : {mean}")
+
+        X1, y1, X2, y2 = generate_gaussian_2d_data(mu = mean)
+        X = np.vstack((X1, X2))
+        y = np.hstack((y1, y2))
+        
+        # Splitting into train, test and val sets
+        X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=int(1250), random_state=42)
+        X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, train_size=int(1000), random_state=42)
+
+        # Performing classification with Linear SVM
+        clf = SVM(kernel='linear')
+        clf.fit(X_train, y_train)
+
+        y_predict = clf.predict(X_test)
+        correct = np.sum(y_predict == y_test)
+
+        # Calculating test accuracy
+        print("Linear SVM Classifier")
+        print("----------------------")
+        print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+        print(f"{correct} out of {len(y_predict)} correctly classified")
+        print("")
+        accuracies['Linear SVM'].append((correct/len(y_predict))*100.)
+
+        # Converting labels from [-1, 1] to [0, 1] for other classifiers
+        y_train[y_train==-1] = 0
+        y_test[y_test==-1] = 0
+
+        # Performing classification with Logistic Regression
+        clf = LogisticRegression(batch_size=20, epochs=1500, learning_rate=0.03)
+        clf.fit(X_train, y_train)
+
+        y_predict = clf.predict(X_test)
+        correct = np.sum(y_predict == y_test)
+
+        # Calculating test accuracy
+        print("Logistic Regression Classifier")
+        print("----------------------")
+        print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+        print(f"{correct} out of {len(y_predict)} correctly classified")
+        print("")
+        accuracies['Logistic Regression'].append((correct/len(y_predict))*100.)
+
+        # Performing classification with K nearest neighbors
+        clf = KNeighborsClassifier(n_neighbors=15)
+        clf.fit(X_train, y_train)
+
+        y_predict = clf.predict(X_test)
+        correct = np.sum(y_predict == y_test)
+
+        # Calculating test accuracy
+        print("K Nearest Neighbors Classifier")
+        print("----------------------")
+        print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+        print(f"{correct} out of {len(y_predict)} correctly classified")
+        print("")
+        accuracies['K Nearest Neighbors'].append((correct/len(y_predict))*100.)
+
+        # Performing classification with K nearest neighbors
+        clf = GaussianNB()
+        clf.fit(X_train, y_train)
+
+        y_predict = clf.predict(X_test)
+        correct = np.sum(y_predict == y_test)
+
+        # Calculating test accuracy
+        print("Gaussian Naive Bayes Classifier")
+        print("----------------------")
+        print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+        print(f"{correct} out of {len(y_predict)} correctly classified")
+        print("")
+        accuracies['Gaussian Naive Bayes'].append((correct/len(y_predict))*100.)
+    
+    # Plotting the mean vs accuracy graph for all classifiers
+    for classifier in accuracies.keys():
+        fig, ax = pl.subplots()
+        accs = accuracies[classifier]
+        ax.plot(means, accs)
+        ax.set_xlim(1, 2.4)
+        ax.set_title(f"Test Accuracy vs Mean for {classifier}")
+        ax.set_xlabel("Mean of the 2D Gaussians")
+        ax.set_ylabel("Test Accuracy")
+        fig.show()
+        input("Close the figure and press a key to continue")
 
 
 def test_circles():
