@@ -1,10 +1,4 @@
 import numpy as np
-from numpy import linalg
-from scipy.sparse.construct import rand
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
-from sklearn.datasets import make_circles
-from sklearn import neighbors
 import cvxopt
 import cvxopt.solvers
              
@@ -47,7 +41,7 @@ def rbf(x, y, sigma=5.0):
     Returns:
     A single scalar representing the kernel's value.
     """
-    return np.exp(-linalg.norm(x-y)**2 / (2 * (sigma ** 2)))
+    return np.exp(-np.linalg.norm(x-y)**2 / (2 * (sigma ** 2)))
 
 class SVM():
     """
@@ -179,7 +173,7 @@ class SVM():
                 for a, sv_y, sv in zip(self.alphas, self.sv_y, self.sv):
                     if self.kernel == 'linear':
                         s += a * sv_y * linear(X[i], sv)
-                    if self.kernel=='gaussian':
+                    if self.kernel=='rbf':
                         s += a * sv_y * rbf(X[i], sv, self.gamma)
                     if self.kernel == 'polynomial':
                         s += a * sv_y * polynomial(X[i], sv, self.degree)

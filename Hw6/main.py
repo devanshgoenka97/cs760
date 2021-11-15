@@ -1,10 +1,11 @@
-from cvxopt import uniform
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_circles
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from logisticregression import LogisticRegression
 from svm import SVM
+from neuralnetwork import NeuralNetwork
 
 import matplotlib.pyplot as pl
 import numpy as np
@@ -265,7 +266,6 @@ def test_linear():
         fig.show()
         input("Close the figure and press a key to continue")
 
-
 def test_circles():
 
     X, y = make_circles(n_samples=1500, random_state=42)
@@ -274,16 +274,144 @@ def test_circles():
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=int(1250), random_state=42)
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, train_size=int(1000), random_state=42)
 
-    clf = SVM(kernel='rbf')
+    # Performing classification with Linear SVM
+    clf = SVM(kernel='linear')
     clf.fit(X_train, y_train)
 
     y_predict = clf.predict(X_test)
     correct = np.sum(y_predict == y_test)
-    print("%d out of %d predictions correct" % (correct, len(y_predict)))
 
-    #plot_margin(X_train[y_train==1], X_train[y_train==-1], clf)
+    # Calculating test accuracy
+    print("Linear SVM Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
 
+    # Plot decision boundary
+    fig, ax = pl.subplots()
+    plot_margin(X_train[y_train==1], X_train[y_train==-1], clf, ax)
+    ax.set_title("Decision boundary for Linear SVM")
+    pl.figure(figsize=(8, 6))
+    pl.axis("tight")
+    fig.show()
+    input("Close the figure and press a key to continue")
+
+    # Performing classification with Polynomial Kernel SVM
+    clf = SVM(kernel='polynomial')
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("Polynomial Kernel SVM Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+    # Plot the decision boundary.
+    #fig, ax = pl.subplots()
+    #plot_contour(X_train[y_train==1], X_train[y_train==-1], clf, ax)
+    #ax.set_title("Decision boundary for Polynomial Kernel SVM")
+    #pl.figure(figsize=(8, 6))
+    #fig.show()
+    #input("Close the figure and press a key to continue")
+
+    # Performing classification with RBF Kernel SVM
+    clf = SVC(kernel='rbf')
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("RBF Kernel SVM Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+    # Plot the decision boundary.
+    fig, ax = pl.subplots()
+    plot_contour(X_train[y_train==1], X_train[y_train==-1], clf, ax)
+    ax.set_title("Decision boundary for RBF Kernel SVM")
+    pl.figure(figsize=(8, 6))
+    fig.show()
+    input("Close the figure and press a key to continue")
+
+    # Using labels [0,1] for other classifiers
+    y_train[y_train==-1] = 0
+    y_test[y_test==-1] = 0
+
+    # Performing classification with Logistic Regression
+    clf = LogisticRegression(batch_size=20, epochs=1500, learning_rate=0.03)
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("Logistic Regression Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+    # Plot decision boundary
+    fig, ax = pl.subplots()
+    plot_margin(X_train[y_train==1], X_train[y_train==0], clf, ax)
+    ax.set_title("Decision boundary for Logistic Regression")
+    pl.figure(figsize=(8, 6))
+    pl.axis("tight")
+    fig.show()
+    input("Close the figure and press a key to continue")
+
+    # Performing classification with K nearest neighbors
+    clf = KNeighborsClassifier(n_neighbors=15)
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("K Nearest Neighbors Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+    # Plot the decision boundary.
+    fig, ax = pl.subplots()
+    plot_contour(X_train[y_train==1], X_train[y_train==0], clf, ax)
+    ax.set_title("Decision boundary for K Nearest Neighbors")
+    pl.figure(figsize=(8, 6))
+    fig.show()
+    input("Close the figure and press a key to continue")
+
+    # Performing classification with Neural Network classifier
+    clf = NeuralNetwork()
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("2-layer Neural Network Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+    # Plot the decision boundary.
+    fig, ax = pl.subplots()
+    plot_contour(X_train[y_train==1], X_train[y_train==0], clf, ax)
+    ax.set_title("Decision boundary for Neural Network classifier")
+    pl.figure(figsize=(8, 6))
+    fig.show()
+    input("Close the figure and press a key to continue")
 
 if __name__ == "__main__":
-    test_linear()
-    #test_circles()
+    #test_linear()
+    test_circles()
