@@ -48,7 +48,7 @@ class SVM():
     Implements the hard-margin and soft-margin SVM using quadratic programming and the kernel trick.
     """
 
-    def __init__(self, kernel='linear', C=None):
+    def __init__(self, kernel='linear', C=None, degree=2, sigma=5):
         """
         Initializes the SVM class with given parameters. 
 
@@ -58,8 +58,8 @@ class SVM():
         """
         self.kernel = kernel
         self.C = C
-        self.degree = 3
-        self.sigma = 5
+        self.degree = degree
+        self.sigma = sigma
         if self.C is not None: 
             self.C = float(self.C)
 
@@ -174,7 +174,7 @@ class SVM():
                     if self.kernel == 'linear':
                         s += a * sv_y * linear(X[i], sv)
                     if self.kernel=='rbf':
-                        s += a * sv_y * rbf(X[i], sv, self.gamma)
+                        s += a * sv_y * rbf(X[i], sv, self.sigma)
                     if self.kernel == 'polynomial':
                         s += a * sv_y * polynomial(X[i], sv, self.degree)
                 y_predict[i] = s
