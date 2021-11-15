@@ -391,14 +391,14 @@ def test_circles():
     input("Close the figure and press a key to continue")
 
     # Performing classification with Neural Network classifier
-    clf = NeuralNetwork()
+    clf = NeuralNetwork(epochs=100, learning_rate=0.3)
     clf.fit(X_train, y_train)
 
     y_predict = clf.predict(X_test)
     correct = np.sum(y_predict == y_test)
 
     # Calculating test accuracy
-    print("2-layer Neural Network Classifier")
+    print("Neural Network Classifier")
     print("----------------------")
     print(f"Test accuracy : {(correct/len(y_predict))*100.}")
     print(f"{correct} out of {len(y_predict)} correctly classified")
