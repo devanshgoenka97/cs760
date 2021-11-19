@@ -2,11 +2,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.datasets import make_circles, load_breast_cancer
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import GaussianNB
-from torch.serialization import load
+from kernellogisticregression import KernelLogisticRegression
 from logisticregression import LogisticRegression
 from svm import SVM
+from l1_svm import L1SVM
+from sklearn.feature_selection import SelectFromModel
 from neuralnetwork import NeuralNetwork
 
 import matplotlib.pyplot as pl
@@ -370,6 +372,22 @@ def evaluate_circles_dataset():
     fig.show()
     input("Close the figure and press a key to continue")
 
+    # Performing classification with Kernel Logistic Regression
+    clf = KernelLogisticRegression(epochs=100, learning_rate=0.03)
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    # Clamp prediction to [0, 1] using 0.5 as a threshold.
+    y_predict = np.array([1 if i > 0.5 else 0 for i in y_predict])
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("Kernel Logistic Regression Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
     # Performing classification with K nearest neighbors
     clf = KNeighborsClassifier(n_neighbors=15)
     clf.fit(X_train, y_train)
@@ -531,7 +549,22 @@ def evaluate_breast_cancer_dataset():
     print(f"{correct} out of {len(y_predict)} correctly classified")
     print("")
 
+    # Performing classification with L1 penalty SVM classifier
+    clf = L1SVM(input_size=X_train.shape[1], epochs=500, learning_rate=0.03, lamda=0.5)
+    clf.fit(X_train, y_train)
+
+    y_predict = clf.predict(X_test)
+    correct = np.sum(y_predict == y_test)
+
+    # Calculating test accuracy
+    print("L1 SVM Classifier")
+    print("----------------------")
+    print(f"Test accuracy : {(correct/len(y_predict))*100.}")
+    print(f"{correct} out of {len(y_predict)} correctly classified")
+    print("")
+
+
 if __name__ == "__main__":
-    #evaluate_gaussian_dataset()
+    evaluate_gaussian_dataset()
     #evaluate_circles_dataset()
-    evaluate_breast_cancer_dataset()
+    #evaluate_breast_cancer_dataset()
