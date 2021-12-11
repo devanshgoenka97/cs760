@@ -26,8 +26,8 @@ with open('eight.txt', 'r') as eights:
 
 # Visualizing two data points
 
-Image.fromarray(np.reshape(three_vectors[0], (16, 16))).show()
-Image.fromarray(np.reshape(eight_vectors[0], (16, 16))).show()
+#Image.fromarray(np.reshape(three_vectors[0], (16, 16))).show()
+#Image.fromarray(np.reshape(eight_vectors[0], (16, 16))).show()
 
 X = np.vstack((three_vectors, eight_vectors))
 
@@ -35,7 +35,7 @@ X = np.vstack((three_vectors, eight_vectors))
 y = X.mean(axis = 0)
 
 # Visualizing the sample mean
-Image.fromarray(np.reshape(y, (16, 16))).show()
+#Image.fromarray(np.reshape(y, (16, 16))).show()
 
 # Calculating the sample covariance matrix
 centered_X = X - y
@@ -84,5 +84,5 @@ labels = ['three'] * 200
 labels.extend(['eight'] * 200)
 
 # Scatter plot of data points reduced to two dimensions
-sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, palette=['red', 'blue'])
-plt.show()
+#sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, palette=['red', 'blue'])
+#plt.show()
