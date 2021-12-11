@@ -3,6 +3,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 import seaborn as sns
+from seaborn.miscplot import palplot
 
 # Constructing threes from text file
 three_vectors = np.zeros((200, 256))
@@ -49,8 +50,8 @@ print(f"Largest Eigenvalue: {eigenvalues[-1]}")
 print(f"Second largest Eigenvalue: {eigenvalues[-2]}")
 
 # Getting 1st and 2nd Principal Components as the eigenvectors corresponding to the largest 2 eigenvalues
-first_pc = np.reshape(eigenvectors[-1], (256, 1))
-second_pc = np.reshape(eigenvectors[-2], (256, 1))
+first_pc = np.reshape(eigenvectors[:, -1], (256, 1))
+second_pc = np.reshape(eigenvectors[:, -2], (256, 1))
 
 # Normalizing all values in eigenvectors to [0, 1] range
 first_pc = (first_pc-min(first_pc))/(max(first_pc)-min(first_pc))
@@ -64,7 +65,7 @@ second_pc = second_pc * 255
 #Image.fromarray(np.reshape(first_pc, (16, 16))).show()
 #Image.fromarray(np.reshape(second_pc, (16, 16))).show()
 
-V = np.hstack((first_pc, second_pc))
+V = np.hstack((np.reshape(eigenvectors[:, -1], (256, 1)), np.reshape(eigenvectors[:, -2], (256, 1))))
 
 # Creating projection of X along the 2 principal components
 proj = np.dot(centered_X, V)
@@ -82,5 +83,5 @@ print(first_eight)
 labels = ['three'] * 200
 labels.extend(['eight'] * 200)
 
-sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, style=labels, palette='colorblind')
+sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, palette=['red', 'blue'])
 plt.show()
