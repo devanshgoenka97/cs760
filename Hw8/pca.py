@@ -26,8 +26,8 @@ with open('eight.txt', 'r') as eights:
 
 # Visualizing two data points
 
-#Image.fromarray(np.reshape(three_vectors[0], (16, 16))).show()
-#Image.fromarray(np.reshape(eight_vectors[0], (16, 16))).show()
+Image.fromarray(np.reshape(three_vectors[0], (16, 16)).T).show()
+Image.fromarray(np.reshape(eight_vectors[0], (16, 16)).T).show()
 
 X = np.vstack((three_vectors, eight_vectors))
 
@@ -35,7 +35,7 @@ X = np.vstack((three_vectors, eight_vectors))
 y = X.mean(axis = 0)
 
 # Visualizing the sample mean
-#Image.fromarray(np.reshape(y, (16, 16))).show()
+Image.fromarray(np.reshape(y, (16, 16)).T).show()
 
 # Calculating the sample covariance matrix
 centered_X = X - y
@@ -62,8 +62,8 @@ first_pc = first_pc * 255
 second_pc = second_pc * 255
 
 # Visualizing the two eigenvectors
-Image.fromarray(np.reshape(first_pc, (16, 16))).show()
-Image.fromarray(np.reshape(second_pc, (16, 16))).show()
+Image.fromarray(np.reshape(first_pc, (16, 16)).T).show()
+Image.fromarray(np.reshape(second_pc, (16, 16)).T).show()
 
 V = np.hstack((np.reshape(eigenvectors[:, -1], (256, 1)), np.reshape(eigenvectors[:, -2], (256, 1))))
 
@@ -84,5 +84,5 @@ labels = ['three'] * 200
 labels.extend(['eight'] * 200)
 
 # Scatter plot of data points reduced to two dimensions
-#sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, palette=['red', 'blue'])
-#plt.show()
+sns.scatterplot(proj[:, 0], proj[:, 1], hue=labels, palette=['red', 'blue'])
+plt.show()
